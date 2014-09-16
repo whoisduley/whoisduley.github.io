@@ -1,0 +1,24 @@
+body {
+	font-family: "Callibri", sans-serif;
+}
+li {
+	font-size: 13pt;
+	line-height: 150%;
+}
+
+li.high {
+	background-color: red;
+}
+
+li.medium {
+	background-color: yellow;
+}
+
+li.low {
+	background-color: green;
+}
+
+li.done {
+	text-decoration: line-through;
+	list-style-image: url('http://www.shophq.com/images/stylesheetimgs/checkMarkSmall.gif');
+}
