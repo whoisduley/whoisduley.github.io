@@ -1,21 +1,22 @@
 body {
 	font-family: "Callibri", sans-serif;
 }
+
 li {
 	font-size: 13pt;
 	line-height: 150%;
 }
 
 li.high {
-	background-color: red;
+	background-color: #FF0000;
 }
 
 li.medium {
-	background-color: yellow;
+	background-color: #F7FE2E;
 }
 
 li.low {
-	background-color: green;
+	background-color: #009900;
 }
 
 li.done {
