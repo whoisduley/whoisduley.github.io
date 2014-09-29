@@ -1,4 +1,62 @@
 body {
-	background-color: #d0e4fe;
-	font-family: "Callibri", sans-serif;
+	font-family: Sans-Serif;
+}
+header {
+	position: fixed;
+	background-color: #bbbbbb;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 20px;
+}
+nav {
+	margin-top: 20px;
+	margin-bottom: 0px;
+	background-color: white;
+}
+nav li {
+	display: inline-block;
+	margin-left: 30px;
+	padding: 0px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+section {
+	float: left;
+	width: 9%;
+	height: 500px;
+	background-color: lightblue;
+	color: white;
+	border-color: black;
+	border-style: solid;
+}
+section li {
+	display: block;
+	position: relative;
+	top: 0px;
+	left: -22px;
+	font-size: 15pt;
+	margin-top: 20px;
+	text-align: center;
+}
+
+aside {
+	float: left;
+	width: 90%;
+	height: 500px;
+	background-color: lightgreen;
+	border-color: black;
+	border-style: solid;
+}
+footer {
+	clear: both;
+	background-color: #bbbbbb;
+}
+body {
+	background-color: lightblue;
+	margin: 0px;
 }
