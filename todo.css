@@ -1,0 +1,14 @@
+body {
+	font-family: sans-serif;
+}
+
+table {
+	display: block;
+	margin-top: 20px;
+	width: 100%;
+}
+
+button {
+	display: block;
+
+}

@@ -1,20 +1,28 @@
+<!-- Build Interface, Add Button, Checkbox(live crossout tasks)-->
 <html>
-	<head>
-		<link rel="stylesheet" href="todostyle.css" type="text/css" />
-	</head>
-	<body>
-		<h1>Things I Must Do</h1>
-		<ul>
-			<li class="high">CS Homework</li>
-			<li class="medium">Psych Homework</li>
-			<li class="medium">Psych Lab</li>
-			<li class="high">Senior Project</li>
-			<li class="medium">Work Out</li>
-			<li class="low">Video Games</li>
-			<li class="low done">Netflix</li>
-			<li class="low">J-Term Arrangments</li>
-			<li class="high">Generally Be Awesome</li>
-			<li class="medium done">Rage against a machine</li>
-		</ul>
-	</body>
+<script>
+addTask = function() {
+	var table, row, value, checkCell, checkbox, newCell;
+	table = document.getElementById("list");
+	value = document.getElementById("newtask").value;
+	checkbox = document.createElement("button");
+	row = table.insertRow();
+	checkCell = row.insertCell(0);
+	newCell = row.insertCell(1);
+
+	checkCell.appendChild(checkbox);
+	newCell.innerHTML = value;
+}
+</script>
+
+<body>
+	<table id="list">
+		<caption>Things To Do</caption>
+		<th>Done</th>
+		<th>Item</th>
+	</table>
+	<label for="newtask">New Task</label>
+	<input id="newtask" type="text"></input>
+	<button id="add" onclick="addTask();">Add Task</button>
+</body>
 </html>
