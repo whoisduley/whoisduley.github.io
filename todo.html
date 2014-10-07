@@ -1,30 +1,81 @@
 <!-- Build Interface, Add Button, Checkbox(live crossout tasks)-->
 <html>
+<head>
+	<link rel="stylesheet" href="todo.css" type="text/css" />
+</head>
+
 <script>
+iter = 0;
 addTask = function() {
-	var table, row, value, checkCell, checkbox, newCell;
-	table = document.getElementById("list");
-	value = document.getElementById("newtask").value;
-	checkbox = document.createElement("button");
-	row = table.insertRow();
-	checkCell = row.insertCell(0);
-	newCell = row.insertCell(1);
+	var item, list, row, val;
+	list = document.getElementById("list");
+	val = document.getElementById("newtask").value;
+	checkbox = document.createElement("input");
+	checkbox.setAttribute("type", "checkbox");
 
-	checkCell.appendChild(checkbox);
-	newCell.innerHTML = value;
+	item = document.createElement("li");
+	item.appendChild(checkbox);
+	text = document.createTextNode(val);
+	item.appendChild(text);
+	checkbox.id = iter;
+	iter++;
+
+	list.appendChild(item);
+
+	checkbox.onclick = function() {
+		item.style.textDecoration = "line-through";
+		item.className = "done";
+		saveList();
+	}
+	saveList();
 }
 
-crossTask = function() {
-	
+saveList = function() {
+	listy = [];
+	allItems = document.querySelectorAll("li");
+	for(i = 0; i < allItems.length; i++) {
+		if (allItems[i].className != "done") {
+			listy.push(allItems[i].innerText);
+		}
+	}
+	localStorage.setItem("todoDatabase", JSON.stringify(listy));
 }
+
+loadList = function(){
+	var listy,item, list, row, val;
+	listy = localStorage.getItem("todoDatabase");
+	listy = JSON.parse(listy);
+
+	for(i = 0; i <= listy.length; i++){
+		console.log(listy);
+		val = listy.shift();
+
+		list = document.getElementById("list");
+		checkbox = document.createElement("input");
+		checkbox.setAttribute("type", "checkbox");
+
+		item = document.createElement("li");
+		item.appendChild(checkbox);
+		text = document.createTextNode(val);
+		item.appendChild(text);
+		checkbox.id = iter;
+		iter++;
+
+		list.appendChild(item);
+
+		checkbox.onclick = function() {
+			item.style.textDecoration = "line-through";
+			item.className = "done";
+			saveList();
+		}
+	}
+}
+
 </script>
 
-<body>
-	<table id="list">
-		<caption>Things To Do</caption>
-		<th>Done</th>
-		<th>Item</th>
-	</table>
+<body onload="loadList()">
+	<ul id="list">
+	</ul>
 	<label for="newtask">New Task</label>
 	<input id="newtask" type="text"></input>
 	<button id="add" onclick="addTask();">Add Task</button>
