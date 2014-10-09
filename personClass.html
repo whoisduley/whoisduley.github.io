@@ -1,0 +1,27 @@
+person = function(a, b, c, d) {
+	var ssn = a
+	var weight = b
+
+	this.age = c
+	this.name = d
+
+	this.gainWeight = function(amount) {
+		weight = weight + amount
+	}
+
+	this.getWeight = function() {
+		return weight
+	}
+
+	this.getSSN = function() {
+		return ssn
+	}
+}
+
+person.prototype.birthday = function() {
+	this.age = this.age + 1
+	return this.age
+}
+
+bob = new person(10, 20, 30, 40)
+alert(bob.getSSN)

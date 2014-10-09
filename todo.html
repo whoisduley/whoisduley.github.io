@@ -1,4 +1,3 @@
-<!-- Build Interface, Add Button, Checkbox(live crossout tasks)-->
 <html>
 <head>
 	<link rel="stylesheet" href="todo.css" type="text/css" />
@@ -47,7 +46,6 @@ loadList = function(){
 	listy = JSON.parse(listy);
 
 	for(i = 0; i <= listy.length; i++){
-		console.log(listy);
 		val = listy.shift();
 
 		list = document.getElementById("list");
