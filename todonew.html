@@ -1,10 +1,22 @@
-//Task List - 1. Add Task 2. remove task 3. save all 4. restore all
-// Task - 1. Name 2. Priority 3. Duedate 4. projectName
-
-//Add Task - 1. Add to Model 2. Display Task list
-
 <html>
 <head>
 	<link rel="stylesheet" href="todo.css" type="text/css" />
-	<script src="todo.jss"></script>
+	<script src="todo.js"></script>
 </head>
+<body onload="loadList()">
+	<div>
+		<ul id="list">
+		</ul>
+	</div>
+	<input id="newtask" type="text"></input>
+	<p>Task</p>
+	<input id="duedate" type="text"></input>
+	<p>Due Date</p>
+	<select id="priority">
+		<option>High</option>
+		<option>Medium</option>
+		<option>Low</option>
+	</select>
+	<p>Priority</p>
+	<button id="add" onclick="buttonPress();">Add Task</button>
+</body>
