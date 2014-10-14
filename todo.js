@@ -1,12 +1,22 @@
 //Task List - 1. Add Task 2. remove task 3. save all 4. restore all
-// Task - 1. Name 2. Priority 3. Duedate 4. projectName
+//Task - 1. Name 2. Priority 3. Duedate 4. projectName
 
 //Add Task - 1. Add to Model 2. Display Task list
 
 TaskList = function() {
 	this.list = [];
 	this.addTask = function(task) {
+		var item;
 		this.list.push(task);
+		checkbox = document.createElement("input");
+		checkbox.setAttribute("type", "checkbox");
+		item = document.createElement("li");
+		item.appendChild(checkbox);
+		text = document.createTextNode(item.name);
+		item.appendChild(text);
+
+		this.list.appendChild(item);
+
 	}
 	// This is probably too complicated by about a billion
 	this.removeTask = function(task, id) {
@@ -24,7 +34,7 @@ TaskList = function() {
 
 	}
 	this.load = function() {
-
+		
 	}
 }
 
@@ -35,4 +45,20 @@ Task = function(name, priority, due, project, status) {
 	this.project = project;
 	// 1 = done; 0 = not done
 	this.status = status;
+}
+
+loadList = function() {
+	listy = new TaskList();
+	listy.load();
+}
+
+buttonPress = function() {
+	var tasky;
+	tasky = new Task();
+	tasky.name = document.getElementById("newtask").value;
+	tasky.priority = document.getElementById("priority").value;
+	tasky.due = document.getElementById("duedate").value;
+	tasky.status = 0;
+
+	listy.addTask(tasky);
 }
