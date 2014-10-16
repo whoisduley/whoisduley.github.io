@@ -1,3 +1,12 @@
+Task = function(name, priority, due, project, status) {
+	this.name = name;
+	this.priority = priority;
+	this.due = due;
+	this.project = project;
+	// 1 = done; 0 = not done
+	this.status = status;
+}
+
 function ListModel(items) {
 	this._items = items;
 	this._selectedIndex = -1;
@@ -19,9 +28,9 @@ ListModel.prototype = {
 
 	checkItemAt : function(index) {
 		var item;
-
 		item = this._items[index];
-		this._items[index].children[1].style.textDecoration='line-through';
+		item.status = 1;
+		//this._items[index].children[1].style.textDecoration='line-through';
 		this.itemChecked.notify({item : item});
 		if (index === this._selectedIndex) {
 			this.setSelectedIndex(-1);
@@ -103,11 +112,13 @@ ListView.prototype = {
 		list.innerHTML = ""
 
 		items = this._model.getItems();
-		//When building you probably will have to add the checks as well
 		for(key in items) {
 			if(items.hasOwnProperty(key)) {
 				var label = document.createElement('label');
-				var text = document.createTextNode(items[key]);
+				var text = document.createTextNode(items[key].name + " " + items[key].due + " " + items[key].priority);
+				alert(text);
+				//text.style.textDecoration='line-through';
+
 				var cb = document.createElement("input");
 				cb.type = 'checkbox';
 				cb.id = 'cbClicked' + [key];
@@ -116,6 +127,11 @@ ListView.prototype = {
 				label.appendChild(text);
 
 				list.appendChild(label);
+
+				// if(items[key].status = 1) {
+				// 	cb.checked = true;
+				// 	text.style.textDecoration='line-through';
+				// }
 			}
 		}
 		this._model.setSelectedIndex(-1);
@@ -147,19 +163,19 @@ function ListController(model, view) {
 
 ListController.prototype = {
 	addItem : function() {
-        var name = taskInput.value;
-        var due = dueInput.value;
-        var priority = priorityInput.value;
-        var combine = [name + " " + due + " " + priority];
+		newTask = new Task();
+        newTask.name = taskInput.value;
+        newTask.due = dueInput.value;
+        newTask.priority = priorityInput.value;
+        newTask.status = 0;
 
-        if (combine) {
-        	this._model.addItem(combine);
+        if (newTask) {
+        	this._model.addItem(newTask);
         }
 	},
 
 	cbChecked : function() {
 		var index;
-
 		index = this._model.getSelectedIndex();
 
 		if (index !== -1) {
