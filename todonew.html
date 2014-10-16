@@ -1,12 +1,32 @@
-//Task List - 1. Add Task 2. remove task 3. save all 4. restore all
-// Task - 1. Name 2. Priority 3. Duedate 4. projectName
-
-//Add Task - 1. Add to Model 2. Display Task list
-
 <html>
-<head>
+<body>
 	<link rel="stylesheet" href="todo.css" type="text/css" />
-	<script src="todo.jss"></script>
-</head>
+	<script src="todonew.js"></script>
+
+	<form id="list">
+	</form>
+	<input class='lower' id='taskInput' type='text'></input>
+	<input class='lower' id='dueInput' type='date'></input>
+	<select class='lower' id='priorityInput'>
+		<option value='High'>High</option>
+		<option value='Medium'>Medium</option>
+		<option value='Low'>Low</option>
+	</select>
+
+	<button class='lower' id='addButton'>Add Task</button>
+
+	<script type="text/javascript">
+        var model = new ListModel(['Task1'])
+        var view = new ListView(model, {
+                'list' : document.getElementById('list'), 
+                'addButton' : document.getElementById('addButton'),
+                'taskInput' : document.getElementById('taskInput'),
+                'dueInput' : document.getElementById('dueInput'),
+                'priorityInput' : document.getElementById('priorityInput')
+            })
+        var controller = new ListController(model, view);
+        view.show();
+    </script>    
+</body>
 
 </html>

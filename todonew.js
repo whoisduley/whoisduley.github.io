@@ -21,14 +21,18 @@ ListModel.prototype = {
 		var item;
 
 		item = this._items[index];
-		this._items.splice(index, 1);
+		this._items[index].children[1].style.textDecoration='line-through';
 		this.itemChecked.notify({item : item});
 		if (index === this._selectedIndex) {
 			this.setSelectedIndex(-1);
 		}
 	},
 
-	getSelectedIndex : function() {
+	getSelectedIndex : function () {
+        return this._selectedIndex;
+    },
+
+	setSelectedIndex : function(index) {
 		var previousIndex;
 
 		previiousIndex = this._selectedIndex;
@@ -61,15 +65,16 @@ function ListView(model, elements) {
 	this._elements = elements;
 
 	this.listModified = new ToDoEvent(this);
-	this.cbChecked = new ToDoEvent(this);
-	this.cdUnchecked = new ToDoEvent(this);
+	this.addButtonClicked = new ToDoEvent(this);
+	this.cbClicked = new ToDoEvent(this);
+	// this.cdUnchecked = new ToDoEvent(this);
 
 	var _this = this;
 
 	this._model.itemAdded.attach(function() {
 		_this.rebuildList();
 	});
-	this._model.cbChecked.attach(function() {
+	this._model.itemChecked.attach(function() {
 		_this.rebuildList();
 	});
 
@@ -81,9 +86,9 @@ function ListView(model, elements) {
 		_this.addButtonClicked.notify();
 	};
 	//Checking the checkboxes will make this more complicated
-	this._elements.cbClicked.onclick = function() {
-		_this.cbClicked.notify();
-	};
+	// this._elements.cbClicked.onclick = function() {
+	// 	_this.cbClicked.notify();
+	// };
 }
 
 ListView.prototype = {
@@ -101,11 +106,68 @@ ListView.prototype = {
 		//When building you probably will have to add the checks as well
 		for(key in items) {
 			if(items.hasOwnProperty(key)) {
-				var newoption = document.createElement("option");
-				newoption.innerText = items[key];
-				list.appendChild(newoption);
+				var label = document.createElement('label');
+				var text = document.createTextNode(items[key]);
+				var cb = document.createElement("input");
+				cb.type = 'checkbox';
+				cb.id = 'cbClicked' + [key];
+
+				label.appendChild(cb);
+				label.appendChild(text);
+
+				list.appendChild(label);
 			}
 		}
 		this._model.setSelectedIndex(-1);
+	},
+
+	checkboxChecked : function() {
+
+	}
+};
+
+function ListController(model, view) {
+	this._model = model;
+	this._view = view;
+
+	var _this = this;
+
+	this._view.listModified.attach(function (sender, args) {
+		_this.updateSelected(args.index);
+	});
+
+	this._view.addButtonClicked.attach(function() {
+		_this.addItem();
+	});
+
+	this._view.cbClicked.attach(function() {
+		_this.cbChecked();
+	});
+}
+
+ListController.prototype = {
+	addItem : function() {
+        var name = taskInput.value;
+        var due = dueInput.value;
+        var priority = priorityInput.value;
+        var combine = [name + " " + due + " " + priority];
+
+        if (combine) {
+        	this._model.addItem(combine);
+        }
+	},
+
+	cbChecked : function() {
+		var index;
+
+		index = this._model.getSelectedIndex();
+
+		if (index !== -1) {
+			this._model.checkItemAt(this._model.getSelectedIndex());
+		}
+	},
+
+	updateSelected : function(index) {
+		this._model.setSelectedIndex(index);
 	}
 };

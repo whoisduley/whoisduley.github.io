@@ -2,7 +2,7 @@ body {
 	font-family: sans-serif;
 }
 
-button {
+.lower {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -10,36 +10,14 @@ button {
 
 }
 
-ul {
+form {
 	list-style: none;
-}
-
-div {
-	background: lightblue;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 90%;
-	height: 60%;
-}
-
-input {
-	margin-top: 20px;
-	display: block;
+	background-color: lightblue;
+	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-select {
-	margin-top: 10px;
+form label {
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-p {
-	margin-top: 10px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
 }
