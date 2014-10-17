@@ -30,7 +30,6 @@ ListModel.prototype = {
 		var item;
 		item = this._items[index];
 		item.status = 1;
-		//this._items[index].children[1].style.textDecoration='line-through';
 		this.itemChecked.notify({item : item});
 		if (index === this._selectedIndex) {
 			this.setSelectedIndex(-1);
@@ -95,9 +94,6 @@ function ListView(model, elements) {
 		_this.addButtonClicked.notify();
 	};
 	//Checking the checkboxes will make this more complicated
-	// this._elements.cbClicked.onclick = function() {
-	// 	_this.cbClicked.notify();
-	// };
 }
 
 ListView.prototype = {
@@ -114,24 +110,32 @@ ListView.prototype = {
 		items = this._model.getItems();
 		for(key in items) {
 			if(items.hasOwnProperty(key)) {
+				var labelID = 'label' + key;
 				var label = document.createElement('label');
+				label.id = labelID;
 				var text = document.createTextNode(items[key].name + " " + items[key].due + " " + items[key].priority);
-				alert(text);
 				//text.style.textDecoration='line-through';
 
 				var cb = document.createElement("input");
 				cb.type = 'checkbox';
-				cb.id = 'cbClicked' + [key];
+				var cbid = 'cb' + key;
+				cb.id = cbid;
 
 				label.appendChild(cb);
 				label.appendChild(text);
 
 				list.appendChild(label);
 
-				// if(items[key].status = 1) {
-				// 	cb.checked = true;
-				// 	text.style.textDecoration='line-through';
+				// document.getElementById(cbid).onchange = function() {
+				// 	document.getElementById(labelID).style.textDecoration='line-through';
 				// }
+			}
+		}
+		for (i = 0; i < list.length; i++) {
+			// list[i].addEventListener('change', style.textDecoration)
+			list[i].onchange = function() {
+				alert(i);
+				style.textDecoration='line-through';
 			}
 		}
 		this._model.setSelectedIndex(-1);
@@ -177,6 +181,7 @@ ListController.prototype = {
 	cbChecked : function() {
 		var index;
 		index = this._model.getSelectedIndex();
+		alert('lijlij');
 
 		if (index !== -1) {
 			this._model.checkItemAt(this._model.getSelectedIndex());
