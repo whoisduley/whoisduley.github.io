@@ -34,6 +34,10 @@ TaskList.prototype = {
 		label.appendChild(cb);
 		label.appendChild(text);
 
+		if (newTask.project) {
+			
+		}
+
 		list.appendChild(label);
 
 		cb.onclick = function() {
@@ -68,11 +72,13 @@ TaskList.prototype = {
 		}
 	}
 
-	// addProject : function() {
-	// 	newProject = document.getElementById('projectInput');
-		
-	// 	list.appendChild()
-	// }
+	addProject : function() {
+		var newProject, text, projectLabel;
+		newProject = document.getElementById('projectInput');
+		projectLabel = document.createElement('label');
+		text = document.createTextNode(newProject);
+		list.appendChild()
+	}
 
 };
 
